@@ -2,8 +2,9 @@
 
 ### From your terminal:
 
+```text
 python deduplicate_records.py
-
+```
 
 Spark will start a local Spark session
 
