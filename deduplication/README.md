@@ -1,4 +1,4 @@
-## How to Run data_dedup.py:
+## How to Run:
 
 ### From your terminal:
 
