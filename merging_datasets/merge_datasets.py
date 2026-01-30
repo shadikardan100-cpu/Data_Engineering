@@ -10,10 +10,13 @@
 
 # Solution Thinking Process:
 # 10M + 50M rows → too large for simple in-memory join on a single machine (unless you have huge RAM).
-
 # Distributed processing is preferred (Spark, Dataflow, BigQuery, Snowflake).
+# Before joining, I’d check for duplicates, missing keys, and normalize emails to avoid joining issues.
+# Should avoid grouping by keys like email or cookie directly, because one identity can have multiple keys, and one key can map to multiple identities.
+# In batch processing, I’d use Spark with partitioning on the join key. For streaming, I’d use stateful windowed joins.
 
 
+### For Batch processing:
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import sum
 
@@ -30,3 +33,4 @@ joined = users.join(purchases, on="email", how="inner")
 result = joined.groupBy("user_id").agg(sum("purchase_amount").alias("total_purchase"))
 
 result.show()
+
